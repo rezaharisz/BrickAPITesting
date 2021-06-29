@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:orientation="vertical"
+    android:background="@color/LightGray"
+    android:padding="6dip" >
+
+
+    <TextView
+        android:background="@color/LightGray"
+        android:id="@+id/firstLine"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:singleLine="true"
+        android:gravity="center_vertical"
+        android:text="First Line"
+        android:textSize="16sp" />
+</RelativeLayout>

@@ -1,0 +1,4 @@
+include ':bricksdk'
+include ':app'
+
+rootProject.name = "BRICK DEMO"

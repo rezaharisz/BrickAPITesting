@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="io.onebrick.sdk.ui.bank.BankCommonActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="24dp">
+
+        <TextView
+            android:id="@+id/secure_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/poweredBy" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="60dp"
+            android:layout_height="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="6dp"
+            android:layout_toEndOf="@+id/secure_text_view"
+            android:layout_toRightOf="@+id/secure_text_view"
+            android:src="@drawable/brick_logo" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/White"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include layout="@layout/secure"/>
+        <include layout="@layout/brick_toolbar" android:id="@+id/toolbarCommon"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:background="@color/White"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@color/White"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include layout="@layout/success_badge" android:id="@+id/success_badge"/>
+                <include layout="@layout/error_badge" android:id="@+id/error_badge"/>
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="377dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:fontFamily="@font/inter_bold"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/selectAccount"
+                android:textColor="#333333"
+                android:textSize="23sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/enter_credentials" />
+                <TextView
+                    android:id="@+id/empty_string"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginVertical="24dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:lineSpacingExtra="2sp"
+                    android:text="@string/inputCredentials"
+                    android:textColor="@color/Black"
+                    android:textSize="14sp" />
+                <include
+                    layout="@layout/mockbank_frame"
+                    android:id="@+id/mockbank_frame"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginEnd="24dp"
+                    />
+                <TextView
+                    android:id="@+id/user_id"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_gravity="left"
+                    android:gravity="left"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:lineSpacingExtra="2sp"
+                    android:text="@string/userId"
+                    android:textColor="@color/Black"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/user_id_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="@string/userId"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="9.5dp"
+                    android:paddingBottom="9.5dp" />
+
+                <TextView
+                    android:id="@+id/password_label"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_gravity="left"
+                    android:gravity="left"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:lineSpacingExtra="2sp"
+                    android:text="@string/password"
+                    android:textColor="@color/Black"
+                    android:textSize="14sp" />
+                <EditText
+                    android:id="@+id/password_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:hint="@string/password"
+                    android:fontFamily="@font/inter_regular"
+                    android:inputType="textPassword"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="@drawable/edit_text_background"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="9.5dp"
+                    android:paddingBottom="9.5dp" />
+
+                <ImageView
+                    android:id="@+id/show_pass_btn"
+                    android:layout_width="32dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="right"
+                    android:onClick="showHidePassword"
+                    android:layout_marginTop="-34dp"
+                    android:layout_marginEnd="34dp"
+                    android:layout_marginRight="34dp"
+                    android:padding="5dp"
+                    android:src="@drawable/eye" />
+
+                <Button
+                    android:id="@+id/submit_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@color/Gray3"
+                    android:textAllCaps="false"
+                    android:enabled="true"
+                    android:fontFamily="@font/inter_semibold"
+                    android:soundEffectsEnabled="true"
+                    android:text="@string/submit"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:theme="@style/DarkButtonStyle" />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

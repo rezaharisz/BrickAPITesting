@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="io.onebrick.sdk">
+
+    <meta-data
+        android:name="android.support.PARENT_ACTIVITY"
+        android:value=".ui.common.LandingActivity" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application>
+        <activity android:name="io.onebrick.sdk.ui.common.EndActivity"></activity>
+        <activity android:name="io.onebrick.sdk.ui.common.SubmitInstituionSuccessActivity" />
+        <activity android:name="io.onebrick.sdk.ui.common.SubmitInstitutionActivity" />
+        <activity android:name="io.onebrick.sdk.ui.ewallet.EwalletOTPOnlyActivity" />
+        <activity android:name="io.onebrick.sdk.ui.ewallet.EWalletPINActivity" />
+        <activity android:name="io.onebrick.sdk.ui.common.BaseActivity" />
+        <activity android:name="io.onebrick.sdk.ui.common.CommonPINActivity" />
+        <activity android:name="io.onebrick.sdk.ui.common.ThankYouPageActivity" />
+        <activity android:name="io.onebrick.sdk.ui.institutions.ListInstitution" />
+        <activity android:name="io.onebrick.sdk.ui.common.LandingActivity" />
+        <activity android:name="io.onebrick.sdk.ui.bank.BankCommonActivity" />
+        <activity android:name="io.onebrick.sdk.ui.ewallet.EwalletActivity" />
+    </application>
+
+</manifest>

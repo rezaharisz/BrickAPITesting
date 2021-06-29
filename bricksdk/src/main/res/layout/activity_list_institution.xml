@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEECF3"
+    tools:context="io.onebrick.sdk.ui.institutions.ListInstitution">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <include layout="@layout/secure" />
+
+        <include layout="@layout/brick_toolbar" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/LightGray"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_title"
+                        android:layout_width="377dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginRight="24dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/selectAccount"
+                        android:textColor="#333333"
+                        android:textSize="23sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+                    <SearchView android:layout_width='match_parent' android:layout_height='wrap_content'
+                        android:id='@+id/searchView'
+                        app:layout_constraintTop_toTopOf='parent'
+                        android:layout_marginBottom="16dp"
+                        app:queryHint="@string/search"
+                        app:iconifiedByDefault="false"
+                        android:layout_marginStart="24dp"
+                        android:clickable="true"
+                        android:queryBackground="@android:color/transparent"
+                        app:queryBackground="@android:color/transparent"
+                        android:iconifiedByDefault="false"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginRight="24dp"
+                        android:background="@drawable/edit_text_background"
+                        app:layout_constraintStart_toStartOf='parent'
+                        app:layout_constraintEnd_toEndOf='parent'/>
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="45sp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginEnd="14dp"
+                        android:minHeight="300dp"
+                        android:layout_marginRight="14dp"
+                        android:layout_marginBottom="16dp"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:id="@+id/filter_top"
+                            android:layout_width="fill_parent"
+                            android:groupIndicator="@null"
+                            android:layout_height="fill_parent"
+                            android:orientation="horizontal">
+                            <!-- Content here -->
+                            <RadioGroup
+                                android:id="@+id/radio_group_selected"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginRight="8dp"
+                                android:gravity="center_horizontal"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+
+                                <RadioButton
+                                    android:id="@+id/radio_all"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="32dp"
+                                    android:layout_marginEnd="8sp"
+                                    android:layout_marginRight="8sp"
+                                    android:background="@drawable/radio_button_background"
+                                    android:textColor="@drawable/radio_button_background"
+                                    android:button="@drawable/radio_button_background"
+                                    android:checked="true"
+                                    android:fontFamily="@font/inter_semibold"
+                                    android:gravity="center"
+                                    android:paddingLeft="16dp"
+                                    android:paddingRight="16dp"
+                                    android:text="@string/all" />
+
+                                <RadioButton
+                                    android:id="@+id/radio_internet_banking"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="32dp"
+                                    android:layout_marginRight="8dp"
+                                    android:textColor="@drawable/radio_button_background"
+                                    android:background="@drawable/radio_button_background"
+                                    android:button="@android:color/transparent"
+                                    android:checked="false"
+                                    android:fontFamily="@font/inter_semibold"
+                                    android:gravity="center"
+                                    android:paddingLeft="16dp"
+                                    android:paddingRight="16dp"
+                                    android:text="Internet Banking" />
+
+                                <RadioButton
+                                    android:id="@+id/radio_mobile_banking"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="32dp"
+                                    android:textColor="@drawable/radio_button_background"
+                                    android:layout_marginRight="8dp"
+                                    android:background="@drawable/radio_button_background"
+                                    android:button="@android:color/transparent"
+                                    android:checked="false"
+                                    android:fontFamily="@font/inter_semibold"
+                                    android:gravity="center"
+                                    android:paddingLeft="16dp"
+                                    android:paddingRight="16dp"
+                                    android:text="Mobile Banking" />
+
+                                <RadioButton
+                                    android:id="@+id/wallet"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="32dp"
+                                    android:layout_marginRight="8dp"
+                                    android:textColor="@drawable/radio_button_background"
+                                    android:background="@drawable/radio_button_background"
+                                    android:button="@android:color/transparent"
+                                    android:checked="false"
+                                    android:fontFamily="@font/inter_semibold"
+                                    android:gravity="center"
+                                    android:paddingLeft="16dp"
+                                    android:paddingRight="16dp"
+                                    android:text="E-Wallet" />
+                                <RadioButton
+                                    android:id="@+id/income"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="32dp"
+                                    android:layout_marginRight="8dp"
+                                    android:textColor="@drawable/radio_button_background"
+                                    android:background="@drawable/radio_button_background"
+                                    android:button="@android:color/transparent"
+                                    android:checked="false"
+                                    android:fontFamily="@font/inter_semibold"
+                                    android:gravity="center"
+                                    android:paddingLeft="16dp"
+                                    android:paddingRight="16dp"
+                                    android:text="Income Verification" />
+
+                            </RadioGroup>
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+
+                <FrameLayout
+                android:id="@+id/idLayoutActVirabrequins"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                    android:minHeight="300dp"
+                android:layout_weight="1">
+                    <ExpandableListView
+                        android:id="@+id/lv_institution"
+                        android:layout_width="fill_parent"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:groupIndicator="@android:color/transparent"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="24dp"
+
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        android:background="@color/pinFieldLibraryTransparent"
+                        android:textFilterEnabled="true" />
+                </FrameLayout>
+                <Button
+                    android:id="@+id/submit_institution"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginRight="24dp"
+                    android:background="@android:color/transparent"
+                    android:enabled="true"
+                    android:fontFamily="@font/inter_bold"
+                    android:soundEffectsEnabled="true"
+                    android:text="@string/cannotFindInstitution"
+                    android:textAllCaps="false"
+                    android:textColor="#F44336"
+                    android:textSize="16sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/secure_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/poweredBy" />
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="60dp"
+                        android:layout_height="10dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_toEndOf="@+id/secure_text_view"
+                        android:layout_toRightOf="@+id/secure_text_view"
+                        android:src="@drawable/brick_logo" />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

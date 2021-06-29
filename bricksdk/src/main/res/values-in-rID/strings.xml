@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="EN">EN</string>
+    <string name="ID">ID</string>
+    <string name="accessPermission">"Berikut adalah data yang diperlukan oleh Brick untuk diakses: "</string>
+    <string name="permissionTitle">%1$s butuh izin anda</string>
+    <string name="accountSubtitle">"Kami akan membaca nama, alamat Anda, dll "</string>
+    <string name="accountTitle">Detail Akun</string>
+    <string name="contactSubtitle">Kami akan membaca nama, alamat Anda, dll</string>
+    <string name="contactTitle">Detail Kontak</string>
+    <string name="transactionSubtitle">Kami akan membaca jumlah, mata uang, dll</string>
+    <string name="transactionTitle">"Detail Transaksi "</string>
+    <string name="grantPermissionButton">Berikan Izin</string>
+    <string name="backToAppName">Tutup dan Kembali ke  %1$s</string>
+    <string name="poweredBy">Didukung oleh</string>
+    <string name="otp">OTP</string>
+    <string name="userId">User ID</string>
+    <string name="secureConnection">Koneksi Aman</string>
+    <string name="cannotFindInstitution">Saya tidak dapat menemukan institusi saya</string>
+    <string name="password">Password</string>
+    <string name="submit">Lanjutkan</string>
+    <string name="agreementSubtitle">"Dengan mengklik “Berikan Izin“, Anda mengizinkan Brick untuk mengambil informasi akun Anda atas nama Anda dan membagikannya dengan Brick. Anda juga menyetujui Persyaratan Layanan dan Kebijakan Privasi Pengguna Akhir kami "</string>
+    <string name="phoneNumber">Nomor Telepon</string>
+    <string name="enterYourPin">Masukkan PIN</string>
+    <string name="enterInstitution">"Masukkan institusi yang Anda inginkan "</string>
+    <string name="tellUs">"Sebutkan institusi yang ingin Anda gunakan dan kami akan secepatnya menambahkannya "</string>
+    <string name="categorySelect">Pilih Kategori</string>
+    <string name="mock">Anda bisa memakai akun dummy:\nUser ID: <font color='#000'>johndoe</font>, Password: <font color='#000'>fintechFirst</font></string>
+    <string name="hintInstitutionName">Masukkan nama Institusi</string>
+    <string name="resend">Kirim ulang</string>
+    <string name="all">Semua</string>
+    <string name="inputCredentials">Silakan masukkan akun %1$s Anda</string>
+    <string name="commonEwallet">Silakan masukkan nomor telepon yang tedaftar di %1$s</string>
+    <string name="mobileNotRegistered">Nomor telepon anda tidak terdaftar</string>
+    <string name="otpSuccess">OTP telah berhasil dikirim</string>
+    <string name="invalidErr">Akun yang Anda masukkan salah</string>
+    <string name="institutionName">Nama Institusi</string>
+    <string name="pin">PIN</string>
+    <string name="jeniusSub">Silakan masukkan OTP Anda</string>
+    <string name="resendOTP">Belum menerima OTP? <font color="#FF6F52">Kirim Ulang</font></string>
+    <string name="commonOTPSubtitle">Silakan masukkan OTP Anda</string>
+    <string name="gdpr">Saya setuju dengan hukum informasi dan transaksi yang tertuang dalam<font color="#FF6F52">UU No 19 Tahun 2016</font> / <font color="#FF6F52">GDPR</font> /<font color="#FF6F52"> PDPA</font></string>
+    <string name="redirect">Dilanjutkan ke aplikasi %1$s</string>
+    <string name="successMessage">"Akun %1$s berhasil terhubung dan sedang dilanjutkan "</string>
+    <string name="hint">You can use our test account credentials: User ID: paseksujana123, Password: paseksujana123</string>
+    <string name="InputPhoneNumber">Nomor Telepon</string>
+    <string name="selectAccount">Pilih Institusi Anda</string>
+    <string name="connectAnotherAccount">Gunakan institusi lain</string>
+    <string name="successSubmit">Institusi berhasil dimasukkan. Kami akan mempertimbangkan untuk menambah institusi tersebut</string>
+    <string name="successConnected">"Institusi berhasil dimasukkan. Kami akan mempertimbangkan untuk menambah institusi tersebut "</string>
+    <string name="successTitleInstituion">"Berhasil Ditambahkan "</string>
+    <string name="otpInput">Silakan masukkan OTP dan PIN Anda</string>
+    <string name="phoneNotRegistered">"Nomor telepon anda tidak terdaftar "</string>
+    <string name="otpHasBeenSent">OTP telah berhasil dikirim</string>
+    <string name="securityNotValid">Security Code yang Anda masukkan salah</string>
+    <string name="otpOnly">"Silakan masukkan OTP Anda "</string>
+    <string name="unknownErr">Maaf terjadi masalah. Mohon coba lagi</string>
+    <string name="empty">Oops, maaf kami tidak bisa menemukan institusi tersebut. Coba ganti kata kunci</string>
+    <string name="search">Cari</string>
+    <string name="bankAccount">Akun Bank</string>
+    <string name="account">Akun</string>
+</resources>

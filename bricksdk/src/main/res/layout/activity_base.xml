@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/secure"/>
+    <include layout="@layout/brick_toolbar" android:id="@+id/toolbarCommon"/>
+    <include layout="@layout/success_badge" android:id="@+id/success_badge"/>
+    <include layout="@layout/error_badge" android:id="@+id/error_badge"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

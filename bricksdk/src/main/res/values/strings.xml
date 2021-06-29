@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="EN">EN</string>
+    <string name="ID">ID</string>
+    <string name="accessPermission">These are the following data that %1$s needs access to:</string>
+    <string name="permissionTitle">%1$s needs your permission</string>
+    <string name="accountSubtitle">We will retrieve your account number, balance etc</string>
+    <string name="accountTitle">Account Details</string>
+    <string name="contactSubtitle">We will retrieve your name, address, etc</string>
+    <string name="contactTitle">Contact Details</string>
+    <string name="transactionSubtitle">We will retrieve your amount, currency, etc</string>
+    <string name="transactionTitle">Transaction Details</string>
+    <string name="grantPermissionButton">Grant Permission</string>
+    <string name="backToAppName">Close and back to %1$s</string>
+    <string name="poweredBy">Powered by</string>
+    <string name="all">All</string>
+    <string name="selectAccount">Select your institution</string>
+    <string name="cannotFindInstitution">I can’t find my institution</string>
+    <string name="secureConnection">Secure Connection</string>
+    <string name="userId">User ID</string>
+    <string name="otp">OTP</string>
+    <string name="password">Password</string>
+    <string name="submit">Submit</string>
+    <string name="jeniusSub">Please input the OTP code sent</string>
+    <string name="commonEwallet">Input your phone number registered with  %1$s</string>
+    <string name="commonOTPSubtitle">Please input the OTP code sent</string>
+    <string name="hint">You can use our test account credentials: User ID: paseksujana123, Password: paseksujana123</string>
+    <string name="inputCredentials">Please input your credentials for %1$s</string>
+    <string name="inputCredentials2" translatable="false">Input your user ID from %1$s</string>
+    <string name="phoneNotRegistered">Mobile Number is not registered</string>
+    <string name="InputPhoneNumber">Phone Number</string>
+    <string name="agreementSubtitle">By clicking “Grant Permission“, you authorize Brick to retrieve your account information on your behalf and share it with AppName. You also agree to our End-User Terms of Service and Privacy Policy.</string>
+    <string name="successMessage">Your %1$s is successfully connected</string>
+    <string name="connectAnotherAccount">Connect another account</string>
+    <string name="successSubmit">Your institution is successfully submitted. We will add your institution as soon as possible</string>
+    <string name="redirect">Redirecting to %1$s app</string>
+    <string name="resend">Resend</string>
+    <string name="successConnected">Your institution is successfully submitted. We will add your institution as soon as possible</string>
+    <string name="successTitleInstituion">Institution added successfully</string>
+    <string name="otpInput">Please input the OTP and PIN</string>
+    <string name="resendOTP">Haven\'t received the OTP yet? <font color='#FF6F52'>Resend</font></string>
+    <string name="phoneNumber">Phone Number</string>
+    <string name="enterYourPin">Input your PIN</string>
+    <string name="pin">PIN</string>
+    <string name="gdpr">I agree with the information and transaction law as written in <font color='#FF6F52'>UU No 19 Tahun 2016</font> / <font color='#FF6F52'>GDPR</font> /<font color='#FF6F52'> PDPA</font></string>
+    <string name="enterInstitution">Enter your institution</string>
+    <string name="tellUs">Tell us which bank you\'d like to connect to and we\'ll add it as soon as possible</string>
+    <string name="categorySelect">Select Category</string>
+    <string name="mock">You can use the dummy account credentials:\nUser ID: <font color='#000'>johndoe</font>, Password: <font color='#000'>fintechFirst</font></string>
+    <string name="institutionName">Institution Name</string>
+    <string name="hintInstitutionName">Input Institution Name</string>
+    <string name="mobileNotRegistered">Mobile Number is not registered</string>
+    <string name="invalidErr">Invalid Bank account credentials</string>
+    <string name="otpSuccess">OTP has been sent successfully</string>
+    <string name="otpHasBeenSent">OTP has been sent successfully</string>
+    <string name="securityNotValid">Security code is not valid</string>
+    <string name="otpOnly">Please input the OTP code sent</string>
+    <string name="empty">Oops, sorry we couldn’t find your institution. Try to change your search keyword</string>
+    <string name="unknownErr">Something went wrong. Please try again</string>
+    <string name="search">Search</string>
+    <string name="bankAccount">Bank Account</string>
+    <string name="account">Account</string>
+</resources>
