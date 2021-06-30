@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package io.onebrick.sdk.ui.ewallet
 
 import android.os.Bundle
@@ -33,18 +35,18 @@ class EWalletPINActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_e_wallet_p_i_n)
-        textTitle = findViewById<TextView>(R.id.text_title)
-        textSubtitle = findViewById<TextView>(R.id.empty_string)
-        passwordTextField = findViewById<EditText>(R.id.password_text)
-        buttonSubmit = findViewById<Button>(R.id.submit_button)
-        showHideImage = findViewById<ImageView>(R.id.show_pass_btn)
-        pinTextField =  findViewById<Pinview>(R.id.squareField1)
+        textTitle = findViewById(R.id.text_title)
+        textSubtitle = findViewById(R.id.empty_string)
+        passwordTextField = findViewById(R.id.password_text)
+        buttonSubmit = findViewById(R.id.submit_button)
+        showHideImage = findViewById(R.id.show_pass_btn)
+        pinTextField =  findViewById(R.id.squareField1)
 
         textTitle.text = ConfigStorage.institutionData.bankName
-        pinTextField.setPinViewEventListener(Pinview.PinViewEventListener { pinview, fromUser -> //Make api calls here or what not
+        pinTextField.setPinViewEventListener { _, _ ->
             isOTPComplete = true
             checkingField()
-        })
+        }
 
         passwordTextField.addTextChangedListener(generalTextWatcher)
 
@@ -87,7 +89,7 @@ class EWalletPINActivity : BaseActivity() {
         )
         CoreBrickSDK.submitCredentialsForMFAAccount(payload,object: IRequestTransactionResult {
 
-            override fun success(credentials: AuthenticateUserResponse?) {
+            override fun success(response: AuthenticateUserResponse?) {
                 dismissLoadingActivity()
                 redirectToThankYouPage()
             }

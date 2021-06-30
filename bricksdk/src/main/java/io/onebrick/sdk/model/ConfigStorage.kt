@@ -13,16 +13,14 @@ class ConfigStorage {
         var secret:String = ""
         var urlV2API:String = ""
         var ampAPIKEY:String = ""
-        var currentMessage:String = ""
         var currentImages = ""
         var appName = ""
-        var isProduction:Boolean = false
+        private var isProduction:Boolean = false
         var name:String = ""
         var url:String = ""
         var currentPhoneNumber = ""
         var currentUCU = ""
         var currentUCP = ""
-        var environment:Environment = Environment.SANDBOX
         var redirectReffId = ""
         lateinit var institutionData: InstitutionData
         lateinit var accessTokenRequest: AccessTokenRequest

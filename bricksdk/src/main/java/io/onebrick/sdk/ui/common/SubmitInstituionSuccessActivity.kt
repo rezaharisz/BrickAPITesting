@@ -9,8 +9,8 @@ import io.onebrick.sdk.ui.institutions.ListInstitution
 
 class SubmitInstituionSuccessActivity : BaseActivity() {
 
-    lateinit var buttonBack:Button
-    lateinit var listButton:Button
+    private lateinit var buttonBack:Button
+    private lateinit var listButton:Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

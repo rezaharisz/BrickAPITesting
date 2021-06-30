@@ -1,5 +1,5 @@
 package io.onebrick.sdk.util
 
-public enum class Environment {
+enum class Environment {
     SANDBOX, PRODUCTION
 }

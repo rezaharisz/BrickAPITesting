@@ -20,18 +20,19 @@ class EndActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_thank_you_page)
 
-        textTitle = findViewById<TextView>(R.id.success_message)
-        textSubtitle = findViewById<TextView>(R.id.redirect_message)
-        images = findViewById<ImageView>(R.id.brand_logo)
-        var institutionType:String = ConfigStorage.institutionData.type;
-        institutionType = if (ConfigStorage.institutionData.type == EWALLET) {
-            "e-Wallet"
-        }
-        else  if (ConfigStorage.institutionData.type == INCOME_VERIFICATION) {
-            String.format(getString(R.string.account))
-        }
-        else {
-            String.format(getString(R.string.bankAccount))
+        textTitle = findViewById(R.id.success_message)
+        textSubtitle = findViewById(R.id.redirect_message)
+        images = findViewById(R.id.brand_logo)
+        val institutionType: String = when (ConfigStorage.institutionData.type) {
+            EWALLET -> {
+                "e-Wallet"
+            }
+            INCOME_VERIFICATION -> {
+                String.format(getString(R.string.account))
+            }
+            else -> {
+                String.format(getString(R.string.bankAccount))
+            }
         }
         textTitle.text =  String.format(getString(R.string.successMessage), institutionType)
         textSubtitle.text =  String.format(getString(R.string.redirect), ConfigStorage.appName)
@@ -40,7 +41,7 @@ class EndActivity : BaseActivity() {
 
     override fun onBackPressed() {
         val intent = Intent(this, LandingActivity::class.java)
-        intent.putExtra("CLOSE_TO_MAIN",true);
+        intent.putExtra("CLOSE_TO_MAIN",true)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) // Removes other Activities from stack
         startActivity(intent)
     }

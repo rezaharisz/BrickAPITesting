@@ -3,7 +3,7 @@ package io.onebrick.sdk.model
 import com.google.gson.annotations.SerializedName
 
 
-public class ApiError {
+class ApiError {
     @SerializedName("status")
     val status: String? = null
 

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package io.onebrick.sdk.ui.common
 
 import android.content.Context
@@ -21,12 +23,12 @@ class ContextUtils(base: Context) : ContextWrapper(base) {
                 LocaleList.setDefault(localeList)
                 configuration.setLocales(localeList)
             } else {
-                configuration.locale = localeToSwitchTo
+                localeToSwitchTo.also { configuration.locale = it }
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
                 context = context.createConfigurationContext(configuration)
             } else {
-                context.resources.updateConfiguration(configuration, resources.displayMetrics)
+                context.run { resources.updateConfiguration(configuration, resources.displayMetrics) }
             }
 
             return ContextUtils(context)

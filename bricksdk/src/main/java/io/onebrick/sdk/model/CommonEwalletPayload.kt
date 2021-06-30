@@ -2,14 +2,14 @@ package io.onebrick.sdk.model
 
 import com.google.gson.annotations.SerializedName
 
-public data class CommonEwalletPayload(
+data class CommonEwalletPayload(
     @SerializedName("institutionId") val institutionId: Long = 0,
     @SerializedName("redirectRefId") val redirectRefId: String? = null,
     @SerializedName("username") val username: String? = null
 )
 
 
-public data class OVORequestCredentialPayload(
+data class OVORequestCredentialPayload(
     @SerializedName("deviceId") val deviceId: String? = null,
     @SerializedName("institutionId") val institutionId: String? = null,
     @SerializedName("otpNumber") val otpNumber: String? = null,

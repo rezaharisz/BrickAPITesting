@@ -18,9 +18,9 @@ class ThankYouPageActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_end)
 
-        textTitle = findViewById<TextView>(R.id.success_message)
-        textSubtitle = findViewById<TextView>(R.id.redirect_message)
-        images = findViewById<ImageView>(R.id.brand_logo)
+        textTitle = findViewById(R.id.success_message)
+        textSubtitle = findViewById(R.id.redirect_message)
+        images = findViewById(R.id.brand_logo)
         initLanguageButton(baseContext,this)
         Log.v("BRICK", ConfigStorage.responseOTPRequest.toString())
         textTitle.text =  String.format(getString(R.string.successMessage), ConfigStorage.institutionData.type)

@@ -1,13 +1,13 @@
 package io.onebrick.sdk.model
 
-public data class AuthenticateUserResponse (
+data class AuthenticateUserResponse (
         val status: Long? = null,
         val message: String? = null,
         val data: AuthenticateUserResponseData? = null
 )
 
 
-public data class AuthenticateUserResponseData (
+data class AuthenticateUserResponseData (
         val accessToken: String? = null,
         val bankId: String? = null,
         val userId: Any? = null,

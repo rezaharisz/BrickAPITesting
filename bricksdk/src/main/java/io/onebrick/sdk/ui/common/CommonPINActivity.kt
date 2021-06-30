@@ -1,7 +1,8 @@
+@file:Suppress("DEPRECATION")
+
 package io.onebrick.sdk.ui.common
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.goodiebag.pinview.Pinview
@@ -23,42 +24,40 @@ class CommonPINActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_common_p_i_n)
 
-        pinTextField =  findViewById<Pinview>(R.id.squareField1)
-        textTitle = findViewById<TextView>(R.id.text_title)
-        textSubtitle = findViewById<TextView>(R.id.empty_string)
-        buttonSubmit = findViewById<Button>(R.id.submit_button)
-        resend =  findViewById<TextView>(R.id.resend_verification)
+        pinTextField =  findViewById(R.id.squareField1)
+        textTitle = findViewById(R.id.text_title)
+        textSubtitle = findViewById(R.id.empty_string)
+        buttonSubmit = findViewById(R.id.submit_button)
+        resend =  findViewById(R.id.resend_verification)
         textTitle.text = ConfigStorage.institutionData.bankName
 
-        pinTextField.setPinViewEventListener(Pinview.PinViewEventListener { pinview, fromUser -> //Make api calls here or what not
+        pinTextField.setPinViewEventListener { _, _ ->
             submitPIN(pinTextField.value.toString())
-        })
+        }
 
         showBackButton()
         initCloseButton()
         initLanguageButton(baseContext,this)
-        resend.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-               showLoadingActivity()
-                CoreBrickSDK.requestResendOTP(object : IRequestTransactionResult {
-                    override fun success(credentials: AuthenticateUserResponse?) {
-                        dismissLoadingActivity()
-                        showToast("OTP Has been sent, please check your inbox")
-                    }
+        resend.setOnClickListener {
+            showLoadingActivity()
+            CoreBrickSDK.requestResendOTP(object : IRequestTransactionResult {
+                override fun success(response: AuthenticateUserResponse?) {
+                    dismissLoadingActivity()
+                    showToast("OTP Has been sent, please check your inbox")
+                }
 
-                    override fun error(t: Throwable?) {
-                        dismissLoadingActivity()
-                        showToast("Something Wrong")
-                    }
+                override fun error(t: Throwable?) {
+                    dismissLoadingActivity()
+                    showToast("Something Wrong")
+                }
 
-                })
-            }
-        })
+            })
+        }
 
 
     }
 
-    fun submitPIN(pin: String) {
+    private fun submitPIN(pin: String) {
         showLoadingActivity()
         buttonSubmit.isEnabled = true
         buttonSubmit.setBackgroundColor(this.buttonSubmit.context.resources.getColor(R.color.OrangeRed))
@@ -74,7 +73,7 @@ class CommonPINActivity : BaseActivity() {
         )
         CoreBrickSDK.submitCredentialsForMFAAccount(payload, object : IRequestTransactionResult {
 
-            override fun success(credentials: AuthenticateUserResponse?) {
+            override fun success(response: AuthenticateUserResponse?) {
                 dismissLoadingActivity()
                 redirectToThankYouPage()
             }

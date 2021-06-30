@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package io.onebrick.sdk.ui.common
 
 import android.app.Activity
@@ -18,8 +20,7 @@ import java.util.*
 open class BaseActivity : Activity() {
 
     private lateinit var toolbarCommon: View
-    private var currentLanguage = "en"
-    lateinit var locale: Locale
+    private lateinit var locale: Locale
     private var currentLang: String? = null
     private lateinit var backButton:Button
     private val loadingOverlay: LoadingOverlay by lazy {
@@ -56,7 +57,7 @@ open class BaseActivity : Activity() {
 
     open fun initCloseButton() {
         val view = findViewById<View>(R.id.toolbarCommon)
-        var closeButton:Button = view.findViewById(R.id.close_button) as Button
+        val closeButton:Button = view.findViewById(R.id.close_button) as Button
         closeButton.setOnClickListener{
 
             if (isTaskRoot) {
@@ -72,9 +73,9 @@ open class BaseActivity : Activity() {
     fun initLanguageButton(context: Context, from: Activity, show:Boolean=false) {
 
         val view = findViewById<View>(R.id.toolbarCommon)
-        var radioGroup:RadioGroup =  view.findViewById(R.id.languageButton) as RadioGroup
-        var worldIcon:ImageView =  view.findViewById(R.id.world_icon) as ImageView
-        var ll:LinearLayout =  view.findViewById(R.id.ll) as LinearLayout
+        val radioGroup:RadioGroup =  view.findViewById(R.id.languageButton) as RadioGroup
+        val worldIcon:ImageView =  view.findViewById(R.id.world_icon) as ImageView
+        val ll:LinearLayout =  view.findViewById(R.id.ll) as LinearLayout
         if(!show) {
             worldIcon.visibility = View.GONE
             ll.visibility = View.GONE
@@ -85,7 +86,7 @@ open class BaseActivity : Activity() {
             radioGroup.check(R.id.endRB)
         }
             radioGroup.setOnCheckedChangeListener { radioGroup, _ ->
-                var selectedId = radioGroup.checkedRadioButtonId
+                val selectedId = radioGroup.checkedRadioButtonId
                 val radioButton: View = radioGroup.findViewById(selectedId)
                 val idx: Int = radioGroup.indexOfChild(radioButton)
                 val radioButtonChild: RadioButton = radioGroup.getChildAt(idx) as RadioButton
@@ -117,10 +118,9 @@ open class BaseActivity : Activity() {
             refresh.putExtra("showNotif","false")
             startActivity(refresh)
             activity.finish()
-        } else {
-
         }
     }
+
     fun showBackButton() {
         val view = findViewById<View>(R.id.toolbarCommon)
         backButton =  view.findViewById(R.id.back_button) as Button
@@ -193,24 +193,24 @@ open class BaseActivity : Activity() {
     }
 
     fun showErrorMessage(show:Boolean,message:String) {
-        var errorMessage :View = findViewById(R.id.error_badge)
+        val errorMessage :View = findViewById(R.id.error_badge)
 
         if(!show) {
             errorMessage.visibility = View.GONE
         } else {
             errorMessage.visibility = View.VISIBLE
-            var  successMessageTextView:TextView =  errorMessage.findViewById(R.id.error_message_text) as TextView
+            val successMessageTextView:TextView =  errorMessage.findViewById(R.id.error_message_text) as TextView
             successMessageTextView.text = message
 
         }
     }
     fun showSuccessMessage(show:Boolean,message:String) {
-        var successMessage:View = findViewById(R.id.success_badge)
+        val successMessage:View = findViewById(R.id.success_badge)
         if(!show) {
             successMessage.visibility = View.GONE
         } else {
             successMessage.visibility = View.VISIBLE
-            var  errorMessageTextView:TextView =  successMessage.findViewById(R.id.success_message_text) as TextView
+            val errorMessageTextView:TextView =  successMessage.findViewById(R.id.success_message_text) as TextView
             errorMessageTextView.text = message
 
 

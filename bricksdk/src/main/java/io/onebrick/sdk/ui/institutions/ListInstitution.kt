@@ -1,4 +1,5 @@
 package io.onebrick.sdk.ui.institutions
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -28,7 +29,7 @@ class ListInstitution : BaseActivity() {
     private lateinit var adapter: ExpandableListAdapter
     private lateinit var searchView:SearchView
     private lateinit var submitInstitutionButton: Button
-    var expandableListTitle: List<String>? = null
+    private var expandableListTitle: List<String>? = null
     private lateinit var radioGroup: RadioGroup
 
 
@@ -37,22 +38,22 @@ class ListInstitution : BaseActivity() {
         super.onCreate(savedInstanceState)
         this.fetchAllInstitution()
         setContentView(R.layout.activity_list_institution)
-        listViewInstitution = findViewById<ExpandableListView>(R.id.lv_institution)
-        filterTopWrapper = findViewById<LinearLayout>(R.id.filter_top)
+        listViewInstitution = findViewById(R.id.lv_institution)
+        filterTopWrapper = findViewById(R.id.filter_top)
 
-        radioGroup = findViewById<RadioGroup>(R.id.radio_group_selected)
-        submitInstitutionButton = findViewById<Button>(R.id.submit_institution)
-        searchView = findViewById<SearchView>(R.id.searchView)
+        radioGroup = findViewById(R.id.radio_group_selected)
+        submitInstitutionButton = findViewById(R.id.submit_institution)
+        searchView = findViewById(R.id.searchView)
         institution = Institution()
         listViewInstitution.setGroupIndicator(null)
 
         submitInstitutionButton.setOnClickListener{
 
-            var userProperties = JSONObject()
+            val userProperties = JSONObject()
             userProperties.put("client_id", ConfigStorage.accessTokenRequest.data.clientId)
             userProperties.put("client_email", ConfigStorage.accessTokenRequest.data.clientEmail)
 
-            var eventProperties = JSONObject()
+            val eventProperties = JSONObject()
             eventProperties.put("client_id", ConfigStorage.accessTokenRequest.data.clientId)
 
             TrackingManager.trackEvent(insti_suggest_button_clicked, applicationContext, application, eventProperties, userProperties)
@@ -64,13 +65,12 @@ class ListInstitution : BaseActivity() {
         initCloseButton()
         initLanguageButton(baseContext, this)
 
-        searchView.queryHint = getString(R.string.search);
+        searchView.queryHint = getString(R.string.search)
 
-        radioGroup.setOnCheckedChangeListener(
-                RadioGroup.OnCheckedChangeListener { group, checkedId ->
-                    val radio: RadioButton = findViewById(checkedId)
-                    adapter.filterByCategories(radio.text.toString(), true)
-                })
+        radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            val radio: RadioButton = findViewById(checkedId)
+            adapter.filterByCategories(radio.text.toString())
+        }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(text: String?): Boolean {
                 adapter.filter.filter(text.toString())
@@ -84,11 +84,11 @@ class ListInstitution : BaseActivity() {
         })
 
 
-        var userProperties = JSONObject()
+        val userProperties = JSONObject()
         userProperties.put("client_id", ConfigStorage.accessTokenRequest.data.clientId)
         userProperties.put("client_email", ConfigStorage.accessTokenRequest.data.clientEmail)
 
-        var eventProperties = JSONObject()
+        val eventProperties = JSONObject()
         eventProperties.put("client_id", ConfigStorage.accessTokenRequest.data.clientId)
         eventProperties.put("client_email", ConfigStorage.accessTokenRequest.data.clientEmail)
         eventProperties.put("public_token", ConfigStorage.barrierToken)
@@ -103,7 +103,7 @@ class ListInstitution : BaseActivity() {
         startActivity(brickCoreUIIntent)
 
     }
-    private fun initFilter(institutionList: Institution) {
+    private fun initFilter() {
 
     }
 
@@ -111,12 +111,12 @@ class ListInstitution : BaseActivity() {
         showLoadingActivity()
         CoreBrickSDK.listInstitution(object : IRequestInstituion {
 
-            override fun success(institutions: Institution?) {
+            override fun success(response: Institution?) {
                 dismissLoadingActivity()
-                if (institutions != null) {
-                    institution = institutions
-                    initializedListView(institution)
-                    initFilter(institution)
+                if (response != null) {
+                    institution = response
+                    initializedListView()
+                    initFilter()
                 }
             }
 
@@ -129,52 +129,51 @@ class ListInstitution : BaseActivity() {
 
 
 
-    fun initializedListView(institutionList: Institution) {
-        if (listViewInstitution != null) {
-            val listData = data
+    @SuppressLint("InflateParams")
+    fun initializedListView() {
+        val listData = data
 
-            expandableListTitle = ArrayList(data.keys.sortedByDescending { data[it]?.size })
+        expandableListTitle = ArrayList(data.keys.sortedByDescending { data[it]?.size })
 
-            adapter = ExpandableListAdapter(
-                    this,
-                    listViewInstitution,
-                    expandableListTitle as ArrayList<String>,
-                    listData
-            )
-            val emptyView: View = layoutInflater.inflate(R.layout.empty_view, null)
-            addContentView(emptyView, listViewInstitution.layoutParams) // You're using the same params as listView
+        adapter = ExpandableListAdapter(
+                this,
+                listViewInstitution,
+                expandableListTitle as ArrayList<String>,
+                listData
+        )
+        val emptyView: View = layoutInflater.inflate(R.layout.empty_view, null)
+        addContentView(emptyView, listViewInstitution.layoutParams) // You're using the same params as listView
 
-            listViewInstitution.emptyView = emptyView
-            listViewInstitution.setAdapter(adapter)
+        listViewInstitution.emptyView = emptyView
+        listViewInstitution.setAdapter(adapter)
 
-            var count = 0
-            institution.data.groupBy { it.type}.forEach{ it
-                count ++
-                it.value.forEach {
-                    count ++
-                }
-            }
-
-            ListViewHelper().getListViewSize(listViewInstitution, count)
-
-            listViewInstitution.setOnChildClickListener { _, _, groupPosition, childPosition, _ ->
-
-                var data = adapter.dataCopy[(adapter.titleListCopy)[groupPosition]]!![childPosition]
-                    ConfigStorage.setCurrentInstitution(data)
-                    if (data.type == EWALLET) {
-                        val brickCoreUIIntent = Intent(this, EwalletActivity::class.java)
-                        brickCoreUIIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                        startActivity(brickCoreUIIntent)
-
-                    } else {
-                        val brickCoreUIIntent = Intent(this, BankCommonActivity::class.java)
-                        brickCoreUIIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                        startActivity(brickCoreUIIntent)
-                    }
-
-
-                false
-            }
+        var count = 0
+        institution.data.groupBy { it.type}.forEach{
+            count ++
+            repeat(it.value.size) {
+                count++
             }
         }
+
+        ListViewHelper().getListViewSize(listViewInstitution, count)
+
+        listViewInstitution.setOnChildClickListener { _, _, groupPosition, childPosition, _ ->
+
+            val data = adapter.dataCopy[(adapter.titleListCopy)[groupPosition]]!![childPosition]
+                ConfigStorage.setCurrentInstitution(data)
+                if (data.type == EWALLET) {
+                    val brickCoreUIIntent = Intent(this, EwalletActivity::class.java)
+                    brickCoreUIIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(brickCoreUIIntent)
+
+                } else {
+                    val brickCoreUIIntent = Intent(this, BankCommonActivity::class.java)
+                    brickCoreUIIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(brickCoreUIIntent)
+                }
+
+
+            false
+        }
+    }
 }

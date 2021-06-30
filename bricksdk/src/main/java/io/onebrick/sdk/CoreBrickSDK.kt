@@ -10,6 +10,7 @@ import okhttp3.Credentials
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 interface IAccessTokenRequestResult {
     fun success(accessToken: AccessToken?)
@@ -40,7 +41,7 @@ interface IRequestSubmitInstitution {
     fun error(t: Throwable?)
 }
 
-public class CoreBrickSDK {
+class CoreBrickSDK {
 
     companion object {
 
@@ -139,8 +140,8 @@ public class CoreBrickSDK {
                             return result.error(Throwable())
                         }
                         ConfigStorage.authenticateUserResponseData = authUserData.data
-                        ConfigStorage.userSessionToken = authUserData.data?.sessionId.toString()
-                        ConfigStorage.responseOTPRequest = authUserData.data!!
+                        ConfigStorage.userSessionToken = authUserData.data.sessionId.toString()
+                        ConfigStorage.responseOTPRequest = authUserData.data
                         return result.success(authUserData)
                     } else {
                         result.error(Throwable())
@@ -163,7 +164,7 @@ public class CoreBrickSDK {
                 override fun onResponse(call: Call<AccountListStatus>, response: Response<AccountListStatus>) {
                     Log.v("BRICK", response.toString())
                     if (response.isSuccessful) {
-                        val accountListStatus: AccountListStatus? = response.body()
+                        response.body()
                     } else {
                         Log.v("BRICK", response.code().toString())
                         Log.v("BRICK", call.request().toString())
@@ -176,12 +177,12 @@ public class CoreBrickSDK {
         fun submitCredentialsForMFAAccount(payload: MFABankingPayload, result: IRequestTransactionResult) {
             val bearer = "Bearer ${ConfigStorage.barrierToken}"
             val request = ServiceBuilder.buildService(BrickAPIEndpoint::class.java)
-            var institution =""
+            var institution: String
 
             (if(ConfigStorage.institutionData.bankName == JENIUS) {
                 "jenius"
             } else {
-                ConfigStorage.institutionData.bankName.toLowerCase()
+                ConfigStorage.institutionData.bankName.toLowerCase(Locale.getDefault())
             }).also { institution = it }
 
             request.requestCommonMFAAuthUser(bearer,institution,
@@ -197,9 +198,9 @@ public class CoreBrickSDK {
 
                     if (response.isSuccessful) {
                         val authUserData: AuthenticateUserResponse = response.body() as AuthenticateUserResponse
-                        ConfigStorage.authenticateUserResponseData = authUserData?.data!!
-                        ConfigStorage.userSessionToken = authUserData.data?.sessionId.toString()
-                        ConfigStorage.responseOTPRequest = authUserData.data!!
+                        ConfigStorage.authenticateUserResponseData = authUserData.data!!
+                        ConfigStorage.userSessionToken = authUserData.data.sessionId.toString()
+                        ConfigStorage.responseOTPRequest = authUserData.data
                         return result.success(authUserData)
                     } else {
                         result.error(Throwable())
@@ -214,12 +215,12 @@ public class CoreBrickSDK {
         fun requestResendOTP(result: IRequestTransactionResult) {
             val bearer = "Bearer ${ConfigStorage.barrierToken}"
             val request = ServiceBuilder.buildService(BrickAPIEndpoint::class.java)
-            var institution =""
+            var institution: String
 
             (if(ConfigStorage.institutionData.bankName == JENIUS) {
                 "jenius"
             } else {
-                ConfigStorage.institutionData.bankName.toLowerCase()
+                ConfigStorage.institutionData.bankName.toLowerCase(Locale.getDefault())
             }).also { institution = it }
 
             request.requestResendOTP(bearer,institution,
@@ -233,9 +234,9 @@ public class CoreBrickSDK {
 
                     if (response.isSuccessful) {
                         val authUserData: AuthenticateUserResponse = response.body() as AuthenticateUserResponse
-                        ConfigStorage.authenticateUserResponseData = authUserData?.data!!
-                        ConfigStorage.userSessionToken = authUserData.data?.sessionId.toString()
-                        ConfigStorage.responseOTPRequest = authUserData.data!!
+                        ConfigStorage.authenticateUserResponseData = authUserData.data!!
+                        ConfigStorage.userSessionToken = authUserData.data.sessionId.toString()
+                        ConfigStorage.responseOTPRequest = authUserData.data
                         return result.success(authUserData)
                     } else {
                         result.error(Throwable())
@@ -262,9 +263,9 @@ public class CoreBrickSDK {
                 override fun onResponse(call: Call<AuthenticateUserResponse>, response: Response<AuthenticateUserResponse>) {
                     if (response.isSuccessful) {
                         val authUserData: AuthenticateUserResponse = response.body() as AuthenticateUserResponse
-                        ConfigStorage.authenticateUserResponseData = authUserData?.data!!
-                        ConfigStorage.userSessionToken = authUserData.data?.sessionId.toString()
-                        ConfigStorage.responseOTPRequest = authUserData.data!!
+                        ConfigStorage.authenticateUserResponseData = authUserData.data!!
+                        ConfigStorage.userSessionToken = authUserData.data.sessionId.toString()
+                        ConfigStorage.responseOTPRequest = authUserData.data
                         return result.success(authUserData)
                     } else {
                         result.error(Throwable())
@@ -322,7 +323,7 @@ public class CoreBrickSDK {
 
                 override fun onResponse(call: Call<AccessToken>, response: Response<AccessToken>) {
                     if (response.isSuccessful) {
-                        val statusCode = response.code()
+                        response.code()
                         val accessToken: AccessToken? = response.body()
                         Log.v("BRICK", accessToken?.data?.access_token.toString())
                         ConfigStorage.barrierToken = accessToken?.data?.access_token.toString()

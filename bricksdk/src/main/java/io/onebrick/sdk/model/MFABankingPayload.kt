@@ -2,7 +2,7 @@ package io.onebrick.sdk.model
 
 import com.google.gson.annotations.SerializedName
 
-public data class MFABankingPayload(
+data class MFABankingPayload(
     @SerializedName("institutionId") val institutionId: Long = 0,
     @SerializedName("redirectRefId") val redirectRefId: String? = null,
     @SerializedName("duration") val duration: Long? = 0,

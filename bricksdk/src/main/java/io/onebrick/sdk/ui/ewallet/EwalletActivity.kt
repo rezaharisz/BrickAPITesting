@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package io.onebrick.sdk.ui.ewallet
 
 import android.content.Intent
@@ -17,6 +19,7 @@ import io.onebrick.sdk.ui.common.BaseActivity
 import io.onebrick.sdk.util.OVO
 import io.onebrick.sdk.util.login_visited
 import org.json.JSONObject
+import java.util.*
 
 class EwalletActivity : BaseActivity() {
 
@@ -29,10 +32,10 @@ class EwalletActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ewallet)
 
-        textTitle = findViewById<TextView>(R.id.text_title)
-        textSubtitle = findViewById<TextView>(R.id.empty_string)
-        usernameTextField = findViewById<EditText>(R.id.user_id_text)
-        buttonSubmit = findViewById<Button>(R.id.submit_button)
+        textTitle = findViewById(R.id.text_title)
+        textSubtitle = findViewById(R.id.empty_string)
+        usernameTextField = findViewById(R.id.user_id_text)
+        buttonSubmit = findViewById(R.id.submit_button)
 
         textTitle.text = ConfigStorage.institutionData.bankName
         textSubtitle.text = String.format(getString(R.string.commonEwallet), ConfigStorage.institutionData.bankName)
@@ -47,15 +50,15 @@ class EwalletActivity : BaseActivity() {
         showSuccessMessage(false,"")
         initLanguageButton(baseContext,this)
 
-        var userProperties = JSONObject()
+        val userProperties = JSONObject()
         userProperties.put("client_id", ConfigStorage.accessTokenRequest.data.clientId)
         userProperties.put("client_email", ConfigStorage.accessTokenRequest.data.clientEmail)
 
-        var eventProperties = JSONObject()
+        val eventProperties = JSONObject()
         eventProperties.put("client_id", ConfigStorage.accessTokenRequest.data.clientId)
         eventProperties.put("email", ConfigStorage.accessTokenRequest.data.clientEmail)
         eventProperties.put("bank_id", ConfigStorage.institutionData.id.toString())
-        eventProperties.put("public_token", ConfigStorage.barrierToken.toString())
+        eventProperties.put("public_token", ConfigStorage.barrierToken)
 
         TrackingManager.trackEvent(login_visited,applicationContext,application,eventProperties,userProperties)
 
@@ -74,13 +77,13 @@ class EwalletActivity : BaseActivity() {
 
 
         CoreBrickSDK.authenticateEwalletUser(payload,object: IRequestTransactionResult {
-            override fun success(credentials: AuthenticateUserResponse?) {
-                Log.v("BRICK", credentials.toString())
+            override fun success(response: AuthenticateUserResponse?) {
+                Log.v("BRICK", response.toString())
                 Log.v("BRICK", ConfigStorage.institutionData.toString())
-                Log.v("BRICK", ConfigStorage.institutionData.bankName.toString())
+                Log.v("BRICK", ConfigStorage.institutionData.bankName)
                 ConfigStorage.currentPhoneNumber = phoneNumber
                 dismissLoadingActivity()
-                return if(ConfigStorage.institutionData.bankName.toUpperCase() == OVO)  {
+                return if(ConfigStorage.institutionData.bankName.toUpperCase(Locale.getDefault()) == OVO)  {
                     Log.v("BRICK", "redirectToPINandOTP")
                     redirectToPINandOTP()
                 } else {

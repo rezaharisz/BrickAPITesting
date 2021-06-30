@@ -1,22 +1,25 @@
+@file:Suppress("CAST_NEVER_SUCCEEDS")
+
 package io.onebrick.sdk
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import android.view.View
 import io.onebrick.sdk.model.AuthenticateUserResponseData
 import io.onebrick.sdk.ui.common.LandingActivity
 import io.onebrick.sdk.util.Environment
 
-public interface ICoreBrickUISDK  {
+interface ICoreBrickUISDK  {
     fun onTransactionSuccess(transactionResult: AuthenticateUserResponseData)
 }
 
-public class CoreBrickUISDK {
+class CoreBrickUISDK {
 
     companion object {
-        var contextParent:Context? = null
-        var coreUIInterface: ICoreBrickUISDK? = null
+        @SuppressLint("StaticFieldLeak")
+        private lateinit var contextParent: Context
+        private var coreUIInterface: ICoreBrickUISDK? = null
         fun initializedUISDK(
                 context: Context,
                 clientId: String,
@@ -31,11 +34,11 @@ public class CoreBrickUISDK {
 
             val brickCoreUIIntent = Intent()
             brickCoreUIIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            brickCoreUIIntent.setClass(contextParent!!, LandingActivity::class.java)
-            contextParent!!.startActivity(brickCoreUIIntent)
+            brickCoreUIIntent.setClass(contextParent, LandingActivity::class.java)
+            contextParent.startActivity(brickCoreUIIntent)
         }
 
-        fun delegatingBackResult(result: AuthenticateUserResponseData, context: Context) {
+        fun delegatingBackResult(result: AuthenticateUserResponseData) {
 
             if(contextParent is ICoreBrickUISDK) coreUIInterface = this as ICoreBrickUISDK
             Log.v("BRICK", result.toString())

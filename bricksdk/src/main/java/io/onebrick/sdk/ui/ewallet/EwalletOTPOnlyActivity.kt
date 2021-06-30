@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package io.onebrick.sdk.ui.ewallet
 
 import android.os.Bundle
@@ -11,7 +13,6 @@ import io.onebrick.sdk.model.ConfigStorage
 import io.onebrick.sdk.model.MFABankingPayload
 import io.onebrick.sdk.ui.common.BaseActivity
 import com.goodiebag.pinview.Pinview
-import com.goodiebag.pinview.Pinview.PinViewEventListener
 
 
 class EwalletOTPOnlyActivity : BaseActivity() {
@@ -25,16 +26,16 @@ class EwalletOTPOnlyActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ewallet_o_t_p_only)
 
-        textTitle = findViewById<TextView>(R.id.text_title)
-        textSubtitle = findViewById<TextView>(R.id.empty_string)
-        buttonSubmit = findViewById<Button>(R.id.submit_button)
-        pinTextField =  findViewById<Pinview>(R.id.squareField1)
+        textTitle = findViewById(R.id.text_title)
+        textSubtitle = findViewById(R.id.empty_string)
+        buttonSubmit = findViewById(R.id.submit_button)
+        pinTextField =  findViewById(R.id.squareField1)
 
         textTitle.text = ConfigStorage.institutionData.bankName
-        pinTextField.setPinViewEventListener(PinViewEventListener { pinview, fromUser -> //Make api calls here or what not
+        pinTextField.setPinViewEventListener { _, _ ->
             isOTPComplete = true
             checkingField()
-        })
+        }
 
         buttonSubmit.setOnClickListener{
             submitOTP(pinTextField.value.toString())
@@ -54,7 +55,7 @@ class EwalletOTPOnlyActivity : BaseActivity() {
         super.onPause()
         showSuccessMessage(false, "")
     }
-    fun checkingField() {
+    private fun checkingField() {
         if (isOTPComplete ) {
             buttonSubmit.isEnabled = true
             buttonSubmit.setBackgroundColor(buttonSubmit.context.resources.getColor(R.color.OrangeRed))
@@ -95,7 +96,7 @@ class EwalletOTPOnlyActivity : BaseActivity() {
 
         CoreBrickSDK.submitCredentialsForMFAAccount(payload, object : IRequestTransactionResult {
 
-            override fun success(credentials: AuthenticateUserResponse?) {
+            override fun success(response: AuthenticateUserResponse?) {
                 dismissLoadingActivity()
                 redirectToThankYouPage()
             }

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package io.onebrick.sdk.ui.common
 
 import android.content.Intent
@@ -41,8 +43,8 @@ class LandingActivity : BaseActivity() {
         setContentView(R.layout.activity_landing)
 
 
-        checkmarkButton = findViewById<CheckBox>(R.id.checkBox)
-        acceptButton = findViewById<Button>(R.id.allow_button)
+        checkmarkButton = findViewById(R.id.checkBox)
+        acceptButton = findViewById(R.id.allow_button)
         cancelButton = findViewById(R.id.button_cancel)
         welcomeLabel = findViewById(R.id.text_title)
         brandLogo = findViewById(R.id.brand_logo)
@@ -65,11 +67,11 @@ class LandingActivity : BaseActivity() {
         }
 
         acceptButton.setOnClickListener {
-            var userProperties = JSONObject()
+            val userProperties = JSONObject()
             userProperties.put("client_id", ConfigStorage.accessTokenRequest.data.clientId)
             userProperties.put("client_email", ConfigStorage.accessTokenRequest.data.clientEmail)
 
-            var eventProperties = JSONObject()
+            val eventProperties = JSONObject()
             eventProperties.put("client_id", ConfigStorage.accessTokenRequest.data.clientId)
             eventProperties.put("public_token", ConfigStorage.barrierToken)
 
@@ -82,11 +84,11 @@ class LandingActivity : BaseActivity() {
         }
         cancelButton.setOnClickListener {
 
-            var userProperties = JSONObject()
+            val userProperties = JSONObject()
             userProperties.put("client_id", ConfigStorage.accessTokenRequest.data.clientId)
             userProperties.put("client_email", ConfigStorage.accessTokenRequest.data.clientEmail)
 
-            var eventProperties = JSONObject()
+            val eventProperties = JSONObject()
             eventProperties.put("client_id", ConfigStorage.accessTokenRequest.data.clientId)
             eventProperties.put("public_token", ConfigStorage.barrierToken)
 
@@ -94,14 +96,14 @@ class LandingActivity : BaseActivity() {
            finish()
         }
         if(intent.getBooleanExtra("CLOSE_TO_MAIN",false)) {
-            CoreBrickUISDK.delegatingBackResult(ConfigStorage.responseOTPRequest,baseContext)
-            finish();
+            CoreBrickUISDK.delegatingBackResult(ConfigStorage.responseOTPRequest)
+            finish()
         }
     }
 
     override fun initCloseButton() {
         val view = findViewById<View>(R.id.toolbarCommon)
-        var closeButton:Button = view.findViewById(R.id.close_button) as Button
+        val closeButton:Button = view.findViewById(R.id.close_button) as Button
         closeButton.setOnClickListener{
             Log.v("BRICK",coreBrickUIDelegate.toString())
            // CoreBrickUISDK.delegatingBackResult(ConfigStorage.responseOTPRequest,baseContext)
@@ -116,13 +118,13 @@ class LandingActivity : BaseActivity() {
 
                 CoreBrickSDK.requestTokenCredentials(
                     object : IRequestTokenCredentials {
-                        override fun success(accessToken: AccessTokenRequest?) {
+                        override fun success(response: AccessTokenRequest?) {
 
-                            var userProperties = JSONObject()
+                            val userProperties = JSONObject()
                             userProperties.put("client_id", ConfigStorage.accessTokenRequest.data.clientId)
                             userProperties.put("client_email", ConfigStorage.accessTokenRequest.data.clientEmail)
 
-                            var eventProperties = JSONObject()
+                            val eventProperties = JSONObject()
                             eventProperties.put("client_id", ConfigStorage.accessTokenRequest.data.clientId)
                             eventProperties.put("client_email", ConfigStorage.accessTokenRequest.data.clientEmail)
 
@@ -132,19 +134,19 @@ class LandingActivity : BaseActivity() {
 
                             welcomeLabel.text = String.format(
                                 getString(R.string.permissionTitle),
-                                accessToken?.data?.clientName
+                                response?.data?.clientName
                             )
 
                             accessPermission.text = String.format(
                                 getString(R.string.accessPermission),
-                                accessToken?.data?.clientName
+                                response?.data?.clientName
                             )
 
-                            Picasso.get().load(accessToken?.data?.clientImageUrl).into(brandLogo)
+                            Picasso.get().load(response?.data?.clientImageUrl).into(brandLogo)
 
                             cancelButton.text = String.format(
                                 getString(R.string.backToAppName),
-                                accessToken?.data?.clientName
+                                response?.data?.clientName
                             )
                         }
 

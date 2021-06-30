@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package io.onebrick.sdk.ui.common
 
 import android.content.Intent
@@ -14,11 +16,13 @@ import io.onebrick.sdk.model.ConfigStorage
 import io.onebrick.sdk.model.InstitutionResponseSubmit
 import io.onebrick.sdk.util.insti_suggest_submitted
 import org.json.JSONObject
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class SubmitInstitutionActivity : BaseActivity() {
 
-    lateinit var spinner:Spinner
+    private lateinit var spinner:Spinner
     private lateinit var institutionName: EditText
     private lateinit var buttonSubmit: Button
 
@@ -44,20 +48,20 @@ class SubmitInstitutionActivity : BaseActivity() {
         buttonSubmit.setOnClickListener {
             showLoadingActivity()
 
-            var eventProperties = JSONObject()
+            val eventProperties = JSONObject()
             eventProperties.put("client_id", ConfigStorage.accessTokenRequest.data.clientId)
             eventProperties.put("email", ConfigStorage.accessTokenRequest.data.clientEmail)
 
-            var userProperties = JSONObject()
+            val userProperties = JSONObject()
             userProperties.put("client_id", ConfigStorage.accessTokenRequest.data.clientId)
             userProperties.put("client_email", ConfigStorage.accessTokenRequest.data.clientEmail)
             TrackingManager.trackEvent(insti_suggest_submitted,applicationContext,application,eventProperties,userProperties)
 
             CoreBrickSDK.submitInstitution(
                 institutionName.text.toString(),
-                spinner.selectedItem.toString().toLowerCase(), object : IRequestSubmitInstitution {
+                spinner.selectedItem.toString().toLowerCase(Locale.getDefault()), object : IRequestSubmitInstitution {
 
-                    override fun success(credentials: InstitutionResponseSubmit?) {
+                    override fun success(response: InstitutionResponseSubmit?) {
                         dismissLoadingActivity()
                         redirectToSuccessPage()
                     }
@@ -82,8 +86,8 @@ class SubmitInstitutionActivity : BaseActivity() {
 
     private fun addDataToSpinner() {
         var list: List<String> = ArrayList()
-        ConfigStorage.institutionList.data.groupBy { it.type}.forEach{ it
-            list +=it.key
+        ConfigStorage.institutionList.data.groupBy { it.type}.forEach{
+            list = list + it.key
         }
         val dataAdapter = ArrayAdapter(
             this,

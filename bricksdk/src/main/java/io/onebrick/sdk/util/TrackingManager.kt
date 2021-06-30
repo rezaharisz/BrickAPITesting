@@ -1,3 +1,5 @@
+@file:Suppress("NAME_SHADOWING")
+
 package io.onebrick.sdk.util
 
 import android.app.Application
@@ -21,14 +23,13 @@ class TrackingManager {
                 .initialize(context, ConfigStorage.ampAPIKEY)
                 .enableForegroundTracking(application)
 
-            var eventPropertiesParams = eventProperties
-            var userProperties = userProperties
+            val userProperties = userProperties
             userProperties.put("source", SOURCE)
 
 
-            Log.v("Brick",eventPropertiesParams.toString())
-            client.setUserProperties(userProperties);
-            client.logEvent(name,eventPropertiesParams)
+            Log.v("Brick", eventProperties.toString())
+            client.setUserProperties(userProperties)
+            client.logEvent(name, eventProperties)
         }
     }
 }

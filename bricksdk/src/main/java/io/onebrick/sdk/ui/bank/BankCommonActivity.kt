@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package io.onebrick.sdk.ui.bank
 
 import android.os.Bundle
@@ -19,6 +21,7 @@ import io.onebrick.sdk.util.MOCKBANK
 import io.onebrick.sdk.util.login_visited
 import io.onebrick.sdk.ui.common.CommonBadgeFragment
 import org.json.JSONObject
+import java.util.*
 
 
 class BankCommonActivity : BaseActivity() {
@@ -37,12 +40,12 @@ class BankCommonActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bank_common)
 
-        textTitle = findViewById<TextView>(R.id.text_title)
-        textSubtitle = findViewById<TextView>(R.id.empty_string)
-        usernameTextField = findViewById<EditText>(R.id.user_id_text)
-        passwordTextField = findViewById<EditText>(R.id.password_text)
-        buttonSubmit = findViewById<Button>(R.id.submit_button)
-        showHideImage = findViewById<ImageView>(R.id.show_pass_btn)
+        textTitle = findViewById(R.id.text_title)
+        textSubtitle = findViewById(R.id.empty_string)
+        usernameTextField = findViewById(R.id.user_id_text)
+        passwordTextField = findViewById(R.id.password_text)
+        buttonSubmit = findViewById(R.id.submit_button)
+        showHideImage = findViewById(R.id.show_pass_btn)
 
         textTitle.text = ConfigStorage.institutionData.bankName
         textSubtitle.text = String.format(
@@ -55,18 +58,18 @@ class BankCommonActivity : BaseActivity() {
         usernameTextField.addTextChangedListener(generalTextWatcher)
         passwordTextField.addTextChangedListener(generalTextWatcher)
 
-        var userProperties = JSONObject()
+        val userProperties = JSONObject()
         userProperties.put("client_id", ConfigStorage.accessTokenRequest.data.clientId)
         userProperties.put("client_email", ConfigStorage.accessTokenRequest.data.clientEmail)
 
-        var eventProperties = JSONObject()
+        val eventProperties = JSONObject()
         eventProperties.put("client_id", ConfigStorage.accessTokenRequest.data.clientId)
         eventProperties.put("bank_id", ConfigStorage.institutionData.id.toString())
-        eventProperties.put("public_token", ConfigStorage.barrierToken.toString())
+        eventProperties.put("public_token", ConfigStorage.barrierToken)
 
         TrackingManager.trackEvent(login_visited,applicationContext,application,eventProperties,userProperties)
 
-        mockBankFrame = findViewById<FrameLayout>(R.id.mockbank_frame)
+        mockBankFrame = findViewById(R.id.mockbank_frame)
         showBackButton()
         initCloseButton()
         showErrorMessage(false,"")
@@ -94,7 +97,7 @@ class BankCommonActivity : BaseActivity() {
 
                    override fun error(t: Throwable?) {
                       dismissLoadingActivity()
-                       var message = getString(R.string.invalidErr)
+                       val message = getString(R.string.invalidErr)
                       showErrorMessage(true,String.format(
                           message
                       ))
@@ -103,7 +106,7 @@ class BankCommonActivity : BaseActivity() {
                })
         }
 
-        if (ConfigStorage.institutionData.bankName.toLowerCase() != MOCKBANK) {
+        if (ConfigStorage.institutionData.bankName.toLowerCase(Locale.ROOT) != MOCKBANK) {
             mockBankFrame.visibility = View.GONE
         }
 

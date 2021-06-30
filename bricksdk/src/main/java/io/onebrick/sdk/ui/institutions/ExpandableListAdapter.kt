@@ -12,6 +12,9 @@ import io.onebrick.sdk.model.ConfigStorage
 import io.onebrick.sdk.model.InstitutionData
 import io.onebrick.sdk.ui.common.ListViewHelper
 import io.onebrick.sdk.model.InstitutionGrouped.data
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 class ExpandableListAdapter internal constructor(
@@ -84,7 +87,7 @@ class ExpandableListAdapter internal constructor(
     override fun getFilter(): Filter {
 
         return object : Filter() {
-            override fun performFiltering(charSequence: CharSequence): Filter.FilterResults {
+            override fun performFiltering(charSequence: CharSequence): FilterResults {
                 val charString = charSequence.toString()
 
                 if (charString.isEmpty()) {
@@ -98,18 +101,22 @@ class ExpandableListAdapter internal constructor(
 
                         val institutionList = dataCopy[titleList[row]]
 
-                        val instData :MutableList<InstitutionData> = mutableListOf<InstitutionData>()
+                        val instData :MutableList<InstitutionData> = mutableListOf()
 
                         if (institutionList != null) {
-                            for(instDetail in institutionList){
+                            for(instDetail in institutionList) {
 
-                                if(instDetail.bankName.toLowerCase().contains(charString.toLowerCase())){
+                                if(instDetail.bankName.toLowerCase(Locale.getDefault()).contains(charString.toLowerCase(
+                                        Locale.getDefault()
+                                    )
+                                    )
+                                ) {
                                     instData.add(instDetail)
                                 }
                             }
                         }
                         if(instData.size > 0){
-                           expandableListDetail[titleList[row].toString()] = instData
+                           expandableListDetail[titleList[row]] = instData
                         }
 
                     }
@@ -117,13 +124,13 @@ class ExpandableListAdapter internal constructor(
 
                 }
                 Log.v("BRICK", dataCopy.toString())
-                val filterResults = Filter.FilterResults()
+                val filterResults = FilterResults()
                 filterResults.values = dataCopy
                 return filterResults
             }
 
-            override fun publishResults(charSequence: CharSequence, filterResults: Filter.FilterResults) {
-                var totalData:Int = 0
+            override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
+                var totalData = 0
                 dataCopy = filterResults.values as HashMap<String, List<InstitutionData>>
                 titleListCopy = arrayListOf(dataCopy.keys.toString())
                 titleListCopy = dataCopy.keys.toList().sortedByDescending { data[it]?.size }
@@ -138,16 +145,16 @@ class ExpandableListAdapter internal constructor(
         }
     }
 
-    fun filterByCategories(categories: String?, filter: Boolean) {
+    fun filterByCategories(categories: String?) {
         Log.v("BRICK", categories.toString())
-        var totalData:Int = 0
+        var totalData = 0
 
         if(categories == "All" || categories == "Semua") {
             dataCopy = dataList
             titleListCopy = titleList
-            ConfigStorage.institutionList.data.groupBy { it.type}.forEach{ it
-                it.value.forEach {
-                    totalData ++
+            ConfigStorage.institutionList.data.groupBy { it.type}.forEach{
+                repeat(it.value.size) {
+                    totalData++
                 }
             }
             ListViewHelper().getListViewSize(listView, totalData +titleListCopy.size)
