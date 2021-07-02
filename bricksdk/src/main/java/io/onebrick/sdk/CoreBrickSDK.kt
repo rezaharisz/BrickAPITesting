@@ -182,7 +182,7 @@ class CoreBrickSDK {
             (if(ConfigStorage.institutionData.bankName == JENIUS) {
                 "jenius"
             } else {
-                ConfigStorage.institutionData.bankName.toLowerCase(Locale.getDefault())
+                ConfigStorage.institutionData.bankName.lowercase(Locale.getDefault())
             }).also { institution = it }
 
             request.requestCommonMFAAuthUser(bearer,institution,
@@ -220,7 +220,7 @@ class CoreBrickSDK {
             (if(ConfigStorage.institutionData.bankName == JENIUS) {
                 "jenius"
             } else {
-                ConfigStorage.institutionData.bankName.toLowerCase(Locale.getDefault())
+                ConfigStorage.institutionData.bankName.lowercase(Locale.getDefault())
             }).also { institution = it }
 
             request.requestResendOTP(bearer,institution,
@@ -331,9 +331,7 @@ class CoreBrickSDK {
                         result.success(accessToken)
                     }
                 }
-
             })
-
         }
     }
 

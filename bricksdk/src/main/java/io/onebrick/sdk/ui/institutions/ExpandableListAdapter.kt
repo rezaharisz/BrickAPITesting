@@ -106,9 +106,10 @@ class ExpandableListAdapter internal constructor(
                         if (institutionList != null) {
                             for(instDetail in institutionList) {
 
-                                if(instDetail.bankName.toLowerCase(Locale.getDefault()).contains(charString.toLowerCase(
-                                        Locale.getDefault()
-                                    )
+                                if(instDetail.bankName.lowercase(Locale.getDefault()).contains(
+                                        charString.lowercase(
+                                            Locale.getDefault()
+                                        )
                                     )
                                 ) {
                                     instData.add(instDetail)
